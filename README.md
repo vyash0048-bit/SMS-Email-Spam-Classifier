@@ -29,6 +29,16 @@ An end-to-end Machine Learning application that classifies SMS or Email messages
 
 ---
 
+## 🤗 Hugging Face Live Demo
+
+Experience the premium visual spam classifier instantly without any local configuration:
+
+🚀 **[Try the Live Web Demo on Hugging Face Spaces](https://huggingface.co/spaces/YashAI07/Email_SMS_Spam_Classifier)**
+
+Simply paste any message content directly into the live threat portal to analyze text markers in real time.
+
+---
+
 ## ✨ Features
 
 - **⚡ Real-time Prediction:** Instant classification of text input using a Streamlit frontend.
@@ -195,4 +205,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-<p align="center">Made with ❤️ by <a href="https://github.com/vyash0048-bit">Yash Vyas</a></p>
+<p align="center">Made with ❤️ by <a href="https://github.com/vyash0048-bit">Yash</a></p>

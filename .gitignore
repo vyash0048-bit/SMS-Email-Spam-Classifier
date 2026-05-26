@@ -157,6 +157,7 @@ cython_debug/
 
 # VS Code
 .vscode/
+.antigravity/
 
 # Machine Learning Artifacts
 # *.pkl  <-- Removed to allow model files for deployment
