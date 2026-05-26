@@ -7,6 +7,11 @@ from nltk.stem.porter import PorterStemmer
 import time
 import json
 import visuals as vis
+import os
+
+# Download only if not already present
+nltk.download('punkt_tab', quiet=True)
+nltk.download('stopwords', quiet=True)
 
 # NLTK data downloads are omitted at runtime to ensure instant application loading
 ps = PorterStemmer()
