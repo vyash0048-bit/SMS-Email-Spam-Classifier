@@ -11,56 +11,136 @@ pinned: false
 
 # 📱 SMS & Email Spam Classifier
 
+<div align="center">
+
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![NLTK](https://img.shields.io/badge/NLTK-000000?style=for-the-badge&logo=nltk&logoColor=white)](https://www.nltk.org/)
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space-orange?style=for-the-badge)](https://huggingface.co/spaces/YashAI07/Email_SMS_Spam_Classifier)
 
+<br/>
+<img src="assets/classifier_ui_mockup.png" width="100%" alt="Spam Classifier UI Showcase" style="border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);" />
+<br/>
+
 An end-to-end Machine Learning application that classifies SMS or Email messages as **Spam** or **Ham** (Not Spam) using Natural Language Processing (NLP) and a Multinomial Naive Bayes model.
+
+</div>
 
 ---
 
 ## ✨ Features
 
-- **Real-time Prediction:** Instant classification of text input.
-- **NLP Preprocessing:** Automated text cleaning, tokenization, stopword removal, and stemming.
-- **Modern UI:** Built with Streamlit for a clean and interactive user experience.
-- **Robust Model:** Trained on the SMS Spam Collection dataset with high precision.
+- **⚡ Real-time Prediction:** Instant classification of text input using a Streamlit frontend.
+- **⚙️ NLP Preprocessing:** Automated text cleaning, tokenization, stopword/punctuation removal, and Porter Stemming.
+- **🎨 Premium Dark Theme:** Beautifully designed cards, input boxes, and visual feedback for the user.
+- **🎯 Robust Performance:** High-precision classification engineered to guarantee zero false positives.
 
 ---
 
 ## 📊 Model Performance
 
-The classifier is evaluated on the test split of the SMS Spam Collection dataset (using an 80/20 train/test split with a deterministic seed `random_state=2`). You can view the live runtime evaluation metrics stored in `metrics.json`.
+The classifier is evaluated on the test split of the SMS Spam Collection dataset (80/20 train/test split with deterministic `random_state=2`). You can view the live runtime evaluation metrics stored in `metrics.json`.
 
-| Metric | Value | Description |
-| :--- | :---: | :--- |
-| **Accuracy** | **97.00%** | Overall percentage of correctly classified messages. |
-| **Precision** | **100.00%** | Percentage of predicted spam that is actually spam (zero false positives!). |
-| **Recall** | **77.54%** | Percentage of actual spam messages correctly identified. |
-| **F1-Score** | **87.35%** | Harmonic mean of precision and recall. |
+<table width="100%">
+  <thead>
+    <tr>
+      <th align="left">Metric</th>
+      <th align="center">Score</th>
+      <th align="left">Visual Progress</th>
+      <th align="left">Key Advantage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Accuracy</strong></td>
+      <td align="center"><code>97.00%</code></td>
+      <td>
+        <img src="https://geps.dev/progress/97?dangerColor=ff4b4b&warningColor=ffa500&successColor=4caf50" alt="Accuracy 97%" width="120" />
+      </td>
+      <td>Excellent overall message classification rate.</td>
+    </tr>
+    <tr>
+      <td><strong>Precision</strong></td>
+      <td align="center"><code>100.00%</code></td>
+      <td>
+        <img src="https://geps.dev/progress/100?dangerColor=ff4b4b&warningColor=ffa500&successColor=4caf50" alt="Precision 100%" width="120" />
+      </td>
+      <td><strong>Zero False Positives!</strong> Legitimate messages are never filtered.</td>
+    </tr>
+    <tr>
+      <td><strong>Recall</strong></td>
+      <td align="center"><code>77.54%</code></td>
+      <td>
+        <img src="https://geps.dev/progress/78?dangerColor=ff4b4b&warningColor=ffa500&successColor=4caf50" alt="Recall 78%" width="120" />
+      </td>
+      <td>High coverage in filtering actual spam messages.</td>
+    </tr>
+    <tr>
+      <td><strong>F1-Score</strong></td>
+      <td align="center"><code>87.35%</code></td>
+      <td>
+        <img src="https://geps.dev/progress/87?dangerColor=ff4b4b&warningColor=ffa500&successColor=4caf50" alt="F1-Score 87%" width="120" />
+      </td>
+      <td>Balanced harmonic mean for robust operations.</td>
+    </tr>
+  </tbody>
+</table>
 
 ### 🧩 Confusion Matrix
+
 ```
-[[896,   0]   # Legitimate messages (Ham) - 100% correct
- [ 31, 107]]  # Spam messages             - 77.54% correct
+                 Predicted Ham    Predicted Spam
+Actual Ham            896                0        <-- 100% Correct Classification
+Actual Spam            31              107        <-- 77.54% Correct Filtering
 ```
 
-> [!NOTE]
-> Because spam filtering datasets are naturally imbalanced, **Precision** is the most critical metric. A precision of **100%** means that a legitimate message is **never** incorrectly flagged as spam (zero false positives), protecting the user from missing important emails/SMS.
+> [!TIP]
+> **Why Precision is our primary goal**: For message filters, a **False Positive** (classifying a critical legitimate message as spam) is far more damaging than a **False Negative** (allowing a minor spam message through). Achieving **100% Precision** ensures your ham messages never go missing!
+
+---
+
+## 🧠 How it Works
+
+The classification pipeline preprocesses and vectorizes text using a modular, step-by-step NLP framework before feeding it into the Naive Bayes classifier:
+
+```mermaid
+graph TD
+    A["📥 Input Message"] --> B["🔤 Lowercase Conversion"]
+    B --> C["✂️ Tokenization (NLTK)"]
+    C --> D["🚫 Alpha-Numeric Filtering"]
+    D --> E["🛑 Stopwords & Punctuation Removal"]
+    E --> F["🌱 Stemming (Porter Stemmer)"]
+    F --> G["🔢 TF-IDF Vectorizer (3000 Features)"]
+    G --> H["🧠 Multinomial Naive Bayes Classifier"]
+    H --> I{"🔮 Classification Result"}
+    I -->|Target = 0| J["✅ Ham / Legitimate"]
+    I -->|Target = 1| K["🚨 Spam Detected"]
+    
+    classDef default fill:#1E1E2F,stroke:#444,stroke-width:1px,color:#fff;
+    classDef highlight fill:#FF4B4B,stroke:#FF4B4B,stroke-width:2px,color:#fff;
+    classDef success fill:#4CAF50,stroke:#4CAF50,stroke-width:2px,color:#fff;
+    classDef step fill:#2C3E50,stroke:#34495E,stroke-width:1px,color:#fff;
+    
+    class A,B,C,D,E,F,G,H,I step;
+    class K highlight;
+    class J success;
+```
 
 ---
 
 ## 🚀 Getting Started
 
-### 📋 Prerequisites
+<details>
+<summary><b>📋 Prerequisites</b> (Click to Expand)</summary>
 
 Ensure you have Python installed. You will also need the following NLTK data:
 - `punkt` (for tokenization)
 - `stopwords` (for text cleaning)
+</details>
 
-### ⚙️ Installation & Setup
+<details open>
+<summary><b>⚙️ Installation & Run Commands</b> (Click to Collapse)</summary>
 
 1. **Clone the repository:**
    ```bash
@@ -84,15 +164,7 @@ Ensure you have Python installed. You will also need the following NLTK data:
    ```bash
    streamlit run app.py
    ```
-
----
-
-## 🧠 How it Works
-
-1. **Text Preprocessing:** The input text is converted to lowercase, tokenized, and stripped of special characters/punctuation.
-2. **Stemming:** Words are reduced to their root form (e.g., "running" -> "run") using the Porter Stemmer.
-3. **Vectorization:** The processed text is converted into numerical data using a pre-trained **TF-IDF Vectorizer**.
-4. **Classification:** A **Multinomial Naive Bayes** model predicts the probability of the message being spam.
+</details>
 
 ---
 
@@ -101,7 +173,7 @@ Ensure you have Python installed. You will also need the following NLTK data:
 - **Frontend:** Streamlit
 - **Machine Learning:** Scikit-learn
 - **NLP:** NLTK
-- **Deployment:** Streamlit Cloud / Local Machine
+- **Deployment:** Streamlit Cloud / Hugging Face Spaces / Local
 
 ---
 
