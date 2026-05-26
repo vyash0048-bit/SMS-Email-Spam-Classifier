@@ -15,6 +15,7 @@ pinned: false
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![NLTK](https://img.shields.io/badge/NLTK-000000?style=for-the-badge&logo=nltk&logoColor=white)](https://www.nltk.org/)
+[![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space-orange?style=for-the-badge)](https://huggingface.co/spaces/YashAI07/Email_SMS_Spam_Classifier)
 
 An end-to-end Machine Learning application that classifies SMS or Email messages as **Spam** or **Ham** (Not Spam) using Natural Language Processing (NLP) and a Multinomial Naive Bayes model.
 
@@ -26,6 +27,28 @@ An end-to-end Machine Learning application that classifies SMS or Email messages
 - **NLP Preprocessing:** Automated text cleaning, tokenization, stopword removal, and stemming.
 - **Modern UI:** Built with Streamlit for a clean and interactive user experience.
 - **Robust Model:** Trained on the SMS Spam Collection dataset with high precision.
+
+---
+
+## 📊 Model Performance
+
+The classifier is evaluated on the test split of the SMS Spam Collection dataset (using an 80/20 train/test split with a deterministic seed `random_state=2`). You can view the live runtime evaluation metrics stored in `metrics.json`.
+
+| Metric | Value | Description |
+| :--- | :---: | :--- |
+| **Accuracy** | **97.00%** | Overall percentage of correctly classified messages. |
+| **Precision** | **100.00%** | Percentage of predicted spam that is actually spam (zero false positives!). |
+| **Recall** | **77.54%** | Percentage of actual spam messages correctly identified. |
+| **F1-Score** | **87.35%** | Harmonic mean of precision and recall. |
+
+### 🧩 Confusion Matrix
+```
+[[896,   0]   # Legitimate messages (Ham) - 100% correct
+ [ 31, 107]]  # Spam messages             - 77.54% correct
+```
+
+> [!NOTE]
+> Because spam filtering datasets are naturally imbalanced, **Precision** is the most critical metric. A precision of **100%** means that a legitimate message is **never** incorrectly flagged as spam (zero false positives), protecting the user from missing important emails/SMS.
 
 ---
 
