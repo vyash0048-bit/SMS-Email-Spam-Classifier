@@ -1,3 +1,14 @@
+---
+title: Email SMS Spam Classifier
+emoji: 📱
+colorFrom: blue
+colorTo: indigo
+sdk: streamlit
+sdk_version: 1.57.0
+app_file: app.py
+pinned: false
+---
+
 # 📱 SMS & Email Spam Classifier
 
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
