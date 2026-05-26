@@ -159,7 +159,7 @@ cython_debug/
 .vscode/
 
 # Machine Learning Artifacts
-*.pkl
+# *.pkl  <-- Removed to allow model files for deployment
 *.h5
 *.joblib
 *.npy
